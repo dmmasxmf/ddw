@@ -20,6 +20,7 @@ public class Teacher {
     }
 
     public String getSex() {
+        System.out.println("dmmmmmmmmmmmmmmmmmmm");
         return sex;
     }
 
