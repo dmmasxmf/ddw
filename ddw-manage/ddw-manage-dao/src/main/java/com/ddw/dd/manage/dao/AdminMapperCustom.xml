@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddw.dd.manage.dao.AdminMapperCustom" >
+  <resultMap id="BaseResultMap" type="com.ddw.dd.manage.pojo.po.Admin" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="isadmin" property="isadmin" jdbcType="INTEGER" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="modifytime" property="modifytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, password, phone, address, sex, age, isadmin, createdate, modifytime
+  </sql>
+    <sql id="Where_Admin">
+        <where>
+            <if test="admin!=null and admin.username!=null and admin.username!=''">
+                and username=#{admin.username}
+            </if>
+        </where>
+    </sql>
+  <select id="selectByUsername" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+   <include refid="Where_Admin"></include>
+
+  </select>
+
+</mapper>

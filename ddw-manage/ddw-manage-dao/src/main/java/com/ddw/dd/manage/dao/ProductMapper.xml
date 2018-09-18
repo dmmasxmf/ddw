@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddw.dd.manage.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.ddw.dd.manage.pojo.po.Product" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="productname" property="productname" jdbcType="VARCHAR" />
+    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="inventory" property="inventory" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="modifytime" property="modifytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ddw.dd.manage.pojo.po.ProductWithBLOBs" extends="BaseResultMap" >
+    <result column="images" property="images" jdbcType="LONGVARCHAR" />
+    <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, category_id, productname, subtitle, picture, price, inventory, status, createdate, 
+    modifytime
+  </sql>
+  <sql id="Blob_Column_List" >
+    images, detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ddw.dd.manage.pojo.po.ProductWithBLOBs" >
+    insert into product (id, category_id, productname, 
+      subtitle, picture, price, 
+      inventory, status, createdate, 
+      modifytime, images, detail
+      )
+    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{inventory,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{modifytime,jdbcType=TIMESTAMP}, #{images,jdbcType=LONGVARCHAR}, #{detail,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddw.dd.manage.pojo.po.ProductWithBLOBs" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="productname != null" >
+        productname,
+      </if>
+      <if test="subtitle != null" >
+        subtitle,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="inventory != null" >
+        inventory,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="modifytime != null" >
+        modifytime,
+      </if>
+      <if test="images != null" >
+        images,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="inventory != null" >
+        #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null" >
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="images != null" >
+        #{images,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddw.dd.manage.pojo.po.ProductWithBLOBs" >
+    update product
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="inventory != null" >
+        inventory = #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null" >
+        modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="images != null" >
+        images = #{images,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ddw.dd.manage.pojo.po.ProductWithBLOBs" >
+    update product
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      productname = #{productname,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      inventory = #{inventory,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      images = #{images,jdbcType=LONGVARCHAR},
+      detail = #{detail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddw.dd.manage.pojo.po.Product" >
+    update product
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      productname = #{productname,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      inventory = #{inventory,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      modifytime = #{modifytime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
